@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  cache-proxy:
+    build:
+      context: .
+      args:
+        PHASE: cache-proxy
+        RELEASE: ${RELEASE:-latest}
+    volumes:
+      - ../releases/${RELEASE:-latest}/cache-proxy:/opt/extract:rw
+  engine:
+    build:
+      context: .
+      args:
+        PHASE: engine
+        RELEASE: ${RELEASE:-latest}
+    volumes:
+      - ../releases/${RELEASE:-latest}/engine:/opt/extract:rw
+  origin:
+    build:
+      context: .
+      args:
+        PHASE: origin
+        RELEASE: ${RELEASE:-latest}
+    volumes:
+      - ../releases/${RELEASE:-latest}/origin:/opt/extract:rw
+  resolver:
+    build:
+      context: .
+      args:
+        PHASE: resolver
+        RELEASE: ${RELEASE:-latest}
+    volumes:
+      - ../releases/${RELEASE:-latest}/resolver:/opt/extract:rw
